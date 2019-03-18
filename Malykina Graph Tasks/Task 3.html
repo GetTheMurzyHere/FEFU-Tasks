@@ -1,0 +1,37 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Задание 3</title>
+</head>
+
+<body>
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+
+        #inputCount {
+            margin-top: 7rem;
+        }
+
+        input[type="button"] {
+            margin-top: 7rem;
+        }
+    </style>
+    <input type="number" id="inputCount">
+    <input type="button" value="Enter" onclick="inputDraw(getElementById('inputCount').value)">
+    <script src="js/p5.min.js"></script>
+    <script src="js/script_2.js"></script>
+</body>
+
+</html>
