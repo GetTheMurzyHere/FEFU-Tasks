@@ -1,8 +1,7 @@
-﻿#include "pch.h"
 #include <iostream>
 #include <string>
-#include <time.h>
 #include <vector>
+#include <fstream>
 
 using namespace std;
 
@@ -29,7 +28,7 @@ void bubbleSort(vector<int> *vec) {
 			if ((*vec)[j - 1] > (*vec)[j]) {
 				int temp = (*vec)[j - 1];
 				(*vec)[j - 1] = (*vec)[j];
-				(*vec)[j] = temp; 
+				(*vec)[j] = temp;
 			}
 		}
 	}
@@ -37,21 +36,21 @@ void bubbleSort(vector<int> *vec) {
 
 void bucketSort(int arr[], int size) {
 	int min = 0, max = 0;
-	setMinAndMax(arr, size ,&min, &max);
+	setMinAndMax(arr, size, &min, &max);
 	if (min == max) {
 		return;
 	}
 
-	int bucketsCount = size / 10 < 5 ? size/2 : size/10;
-	float range = max - min;
+	int bucketsCount = size / 10 < 5 ? size / 2 : size / 10;
+	float delta = (float(max - min)) / bucketsCount;
 	vector<vector<int>> buckets;
 
 	for (int i = 0; i < bucketsCount; i++) {
 		buckets.push_back(vector<int>());
 	}
-	
+
 	for (int i = 0; i < size; i++) {
-		int index = (int)(arr[i] * bucketsCount / range);
+		int index = (int)((arr[i] - min) / delta);
 		buckets[index >= bucketsCount ? bucketsCount - 1 : index].push_back(arr[i]);
 	}
 
@@ -72,23 +71,27 @@ void bucketSort(int arr[], int size) {
 int main()
 {
 	int size;
-	cin >> size;
+
+	ifstream input("input.txt");
+
+	input >> size;
+
 	int *inputArray = new int[size];
 
-	srand(time(NULL));
-
 	for (int i = 0; i < size; i++) {
-		inputArray[i] = rand() % 101;
-		cout << inputArray[i] << " ";
+		input >> inputArray[i];
 	}
 
-	cout << endl;
+	input.close();
+	ofstream output("output.txt");
 
 	bucketSort(inputArray, size);
 
 	for (int i = 0; i < size; i++) {
-		cout << inputArray[i] << " ";
+		output << inputArray[i] << " ";
 	}
-	
+
+	output.close();
+
 	return 0;
 }
